@@ -4,4 +4,10 @@ const playlistGet = (req, res) => {
     });
 }
 
-module.exports = playlistGet;
+const playlistPost = (req, res) => {
+    res.json({
+        data: 'Video Post'
+    });
+}
+
+module.exports = { playlistGet, playlistPost };
