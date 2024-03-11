@@ -29,4 +29,5 @@ const userPost = async (req, res = response) => {
     })
 }
 
-module.exports = { userGet, userPost };
+
+module.exports = { userGet, userPost};

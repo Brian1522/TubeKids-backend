@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-const {dbConnection} = require("../database/config");
+const { dbConnection } = require("../database/config");
 
 class Server {
     constructor() {
@@ -10,10 +10,12 @@ class Server {
         this.usersPath = "/api/users";
         this.playlistPath = "/api/playlist";
         this.cuentasPath = "/api/cuentas";
+        this.auth = "/api/auth";
 
         this.connectionToDb();
         this.middewares();
         this.routes();
+
     }
 
     async connectionToDb() {
@@ -31,6 +33,7 @@ class Server {
         this.app.use(this.usersPath, require("../routes/user"));  //ruta user endpoint
         this.app.use(this.playlistPath, require("../routes/playlist")); // ruta playlis endpoint
         this.app.use(this.cuentasPath, require("../routes/cuentas"));
+        this.app.use(this.auth, require("../routes/auth"));
 
     }
 
