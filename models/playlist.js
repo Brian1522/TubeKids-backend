@@ -8,6 +8,11 @@ const PlaylistSchema = Schema({
     url: {
         type: String,
         required: [true, "URl is required"],
+    },
+    status: {
+        type: Boolean,
+        default: true
     }
+
 });
 module.exports = model("Playlist", PlaylistSchema);

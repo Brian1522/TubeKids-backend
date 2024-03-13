@@ -1,8 +1,12 @@
 const Playlist = require("../models/playlist")
 
-const playlistGet = (req, res) => {
+const playlistGet = async (req, res) => {
+    const playlist = await Playlist.find({ status: true }); // trae todas las playlist en true
+    const totalplaylist = await Playlist.countDocuments({status:true}); // total de playlist
     res.json({
-        data: 'Video'
+        playlist,
+        totalplaylist
+
     });
 }
 
@@ -20,5 +24,15 @@ const playlistPost = async (req, res) => {
     })
 }
 
+const playlistDelete = async (req, res) => {
+    const { id } = req.params;
 
-module.exports = { playlistGet, playlistPost };
+    const playlist = await Playlist.findByIdAndUpdate(id, { status: false });
+
+    res.json({
+        msg: 'Playlist deleted',
+        playlist
+    })
+}
+
+module.exports = { playlistGet, playlistPost, playlistDelete };
