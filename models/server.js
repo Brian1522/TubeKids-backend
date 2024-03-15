@@ -10,9 +10,8 @@ class Server {
         this.port = process.env.PORT || 8080;
         this.usersPath = "/api/users";
         this.playlistPath = "/api/playlist";
-        this.cuentasPath = "/api/cuentas";
         this.auth = "/api/auth";
-        this.accounsPath = "api/accounts"
+        this.accountsPath = "/api/accounts"
 
         this.connectionToDb();
         this.middewares();
@@ -34,9 +33,9 @@ class Server {
     routes() {
         this.app.use(this.usersPath, require("../routes/user"));  //ruta user endpoint
         this.app.use(this.playlistPath, require("../routes/playlist")); // ruta playlis endpoint
-        this.app.use(this.cuentasPath, require("../routes/cuentas")); // ruta cuentas endpoint
+        this.app.use(this.accountsPath, require("../routes/accounts")); // ruta account endpoint
         this.app.use(this.auth, require("../routes/auth")); // ruta auth endpoint
-        this.app.use(this.accounsPath, require("../routes/accounts-playlist")); // ruta playlis cuentas endpoint
+       
 
     }
 

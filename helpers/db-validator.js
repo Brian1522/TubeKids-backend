@@ -1,6 +1,6 @@
 const User = require("../models/user");
 const Playlist = require("../models/playlist");
-const Account = require("../models/cuentas");
+const Account = require("../models/accounts");
 const Role = require("../models/role");
 
 const isRegisteredEmail = async (email = "") => {
@@ -37,7 +37,14 @@ const isRegisteredaccount = async (name = "") => {
     throw new Error(`Name ${name} is already registered`);
   }
 };
+//valida que exista la cuenta
+const isNotRegisteredaccount = async (id = "") => {
+  const idExist = await Account.findById(id);
 
+  if (!idExist) { // si no existe
+    throw new Error(`id ${id} is not registered`);
+  }
+};
 //valida idplaylist
 const isRegisteredPlaylist = async (id = "") => {
   const idExist = await Playlist.findById(id);
@@ -56,4 +63,7 @@ const isValidRole = async (role = "") => {
   }
 };
 
-module.exports = { isRegisteredEmail, isRegisteredVideo, isRegisteredUrl, isRegisteredaccount, isRegisteredPlaylist }
+module.exports = {
+  isRegisteredEmail, isRegisteredVideo, isRegisteredUrl, isRegisteredaccount, isRegisteredPlaylist,
+  isNotRegisteredaccount
+}
