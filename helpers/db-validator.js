@@ -53,17 +53,15 @@ const isRegisteredPlaylist = async (id = "") => {
     throw new Error(`Id ${id} is not registered`);
   }
 };
-
-//valida los roles
-const isValidRole = async (role = "") => {
-  const existRole = await Role.findOne({ role });
-
-  if (!existRole) {
-    throw new Error(`Role ${role} is not registered in DB`);
+const isNotRegisteredplaylist = async (id = "") => {
+  const idExist = await Playlist.findById(id);
+  
+  if (!idExist) { // si no existe
+    throw new Error(`id ${id} is not registered`);
   }
 };
 
 module.exports = {
   isRegisteredEmail, isRegisteredVideo, isRegisteredUrl, isRegisteredaccount, isRegisteredPlaylist,
-  isNotRegisteredaccount
+  isNotRegisteredaccount, isNotRegisteredplaylist
 }

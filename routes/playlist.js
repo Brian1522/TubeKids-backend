@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { playlistGet, playlistPost, playlistDelete } = require("../controllers/playlist");
+const { playlistGet, playlistPost, playlistDelete, playlistPut } = require("../controllers/playlist");
 const { validateFields } = require("../middawares/validate-fields");
-const { isRegisteredVideo, isRegisteredUrl, isRegisteredPlaylist } = require("../helpers/db-validator");
+const { isRegisteredVideo, isRegisteredUrl, isRegisteredPlaylist, isNotRegisteredplaylist } = require("../helpers/db-validator");
 
 
 const router = Router();
@@ -19,7 +19,13 @@ router.post("/", [
 router.delete("/:id", [
     check("id", "Id is invalid").isMongoId().custom(isRegisteredPlaylist),
     validateFields
-], playlistDelete
+], playlistDelete);
+
+router.put("/:id", [
+    check("id", "Id is invalid").isMongoId().custom(isNotRegisteredplaylist),
+    validateFields
+], playlistPut
 );
+
 
 module.exports = router;

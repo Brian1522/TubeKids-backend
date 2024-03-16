@@ -15,4 +15,9 @@ const PlaylistSchema = Schema({
     }
 
 });
+PlaylistSchema.methods.toJSON = function () {
+    const { __v, _id, ...playlist } = this.toObject();
+    playlist.uid = _id;
+    return playlist;
+}
 module.exports = model("Playlist", PlaylistSchema);

@@ -22,7 +22,7 @@ const cuentasPost = async (req, res) => {
         account
     })
 }
-
+//Actualiza cuenta
 const accountsPut = async (req, res) => {
     const { id } = req.params;
     const { ...rest } = req.body; // trae todo post

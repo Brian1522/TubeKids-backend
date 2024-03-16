@@ -34,5 +34,16 @@ const playlistDelete = async (req, res) => {
         playlist
     })
 }
+//Actualiza playlist
+const playlistPut = async (req, res) => {
+    const {id } = req.params;
+    const { ...rest } = req.body; // trae todo post
 
-module.exports = { playlistGet, playlistPost, playlistDelete };
+    const playlist = await Playlist.findByIdAndUpdate(id, rest);
+
+    res.status(200).json({
+        msg: 'Playlist edited',
+        playlist
+    })
+}
+module.exports = { playlistGet, playlistPost, playlistDelete,playlistPut };
