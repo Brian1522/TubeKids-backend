@@ -16,7 +16,7 @@ const isAdminRole = (req, res, next) => {
     next();
   };
   
-  const      hasRole = (...roles) => {
+  const  hasRole = (...roles) => {
     return (req, res, next) => {
       if (!req.user) {
         return res.status(500).json({

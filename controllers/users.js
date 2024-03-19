@@ -5,10 +5,13 @@ const User = require("../models/user");
 
 
 
-const userGet = async (req = request, res = response) => {
+const userGet = async (req,res) => {
+    const user = await User.find({ status:true}); // trae todos los usuarios en tue
+    const totaluser = await User.countDocuments({status:true});
     res.json({
-        data: 'hola get'
-    })
+        user,
+        totaluser
+    });
 }
 const userPost = async (req, res = response) => {
     const { name, email, cellphone, password, role, lastname, birthday, country, pin } = req.body;
@@ -17,11 +20,11 @@ const userPost = async (req, res = response) => {
         name, email, cellphone, password, role, lastname, birthday, country, pin
     });
 
-    if (password) {
+     if (password) {
         const salt = bcryptjs.genSaltSync();
         user.password = bcryptjs.hashSync(password, salt); // encripta la contra
     }
-
+ 
     await user.save(); // se guarda
     res.status(201).json({
         msg: 'user created',

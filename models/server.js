@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 
 const { dbConnection } = require("../database/config");
-const playlist = require("./playlist");
 
 class Server {
     constructor() {
@@ -14,7 +13,7 @@ class Server {
         this.accountsPath = "/api/accounts"
 
         this.connectionToDb();
-        this.middewares();
+        this.middlewares();
         this.routes();
 
     }
@@ -23,7 +22,7 @@ class Server {
         await dbConnection();
     }
 
-    middewares() {
+    middlewares() {
         this.app.use(cors()); // acceeso de consulta api
         this.app.use(express.json());// para comunicarce por json
         this.app.use(express.static("public"));
