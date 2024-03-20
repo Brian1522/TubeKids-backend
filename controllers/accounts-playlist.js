@@ -8,10 +8,10 @@ const accountsPlaylistGet = async (req, res) => {
 }
 
 const accountsplaylistPost = async (req, res) => {
-    const { userId, playlistId } = req.body;
+    const { accountId, idPlaylist, } = req.body;
 
     const accountsPlaylist = new Playlist({
-        userId, playlistId 
+        account: accountId, playlist: idPlaylist
     });
 
     await accountsPlaylist.save(); // se guarda

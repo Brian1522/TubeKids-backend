@@ -1,10 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const AccountsPlaylistSchema = new Schema({
-    user: {
+    account: {
         type: Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "User is required"],
+        ref: "Account",
+        required: [true, "Account is required"],
     },
     playlist: {
         type: Schema.Types.ObjectId,

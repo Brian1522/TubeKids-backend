@@ -1,8 +1,9 @@
 const Playlist = require("../models/playlist")
 
 const playlistGet = async (req, res) => {
-    const playlist = await Playlist.find({ status: true }); // trae todas las playlist en true
-    const totalplaylist = await Playlist.countDocuments({status:true}); // total de playlist
+    const {idUser}= req.params;
+    const playlist = await Playlist.find({ status: true , user : idUser}); // trae todas las playlist en true
+    const totalplaylist = await Playlist.countDocuments({ status: true, user : idUser  }); // total de playlist
     res.json({
         playlist,
         totalplaylist
@@ -11,10 +12,10 @@ const playlistGet = async (req, res) => {
 }
 
 const playlistPost = async (req, res) => {
-    const { name, url } = req.body;
+    const { name, url, userId } = req.body;
 
     const playlist = new Playlist({
-        name, url
+        name, url, user: userId
     });
 
     await playlist.save(); // se guarda
@@ -36,7 +37,7 @@ const playlistDelete = async (req, res) => {
 }
 //Actualiza playlist
 const playlistPut = async (req, res) => {
-    const {id } = req.params;
+    const { id } = req.params;
     const { ...rest } = req.body; // trae todo post
 
     const playlist = await Playlist.findByIdAndUpdate(id, rest);
@@ -46,4 +47,4 @@ const playlistPut = async (req, res) => {
         playlist
     })
 }
-module.exports = { playlistGet, playlistPost, playlistDelete,playlistPut };
+module.exports = { playlistGet, playlistPost, playlistDelete, playlistPut };
